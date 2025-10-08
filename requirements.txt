@@ -3,4 +3,5 @@ numpy
 jieba # 中国語分詞
 # fugashi # 日本語分詞
 flask
-# pickle　
+# pickle
+tqdm
