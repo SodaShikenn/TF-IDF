@@ -9,27 +9,37 @@ class TFIDFModel():
         self.corpus_words = []
     
     def load_corpus(self, corpus):
-        for sentence in corpus:
-            words = text_cut(text)
-            self.all_words += words
-            self.vocab = self.vocab.update(words)
+        for sentence in tqdm(corpus, desc='load corpus'):
+            # words = sentence.strip().split(' ') # 英文分词
+            words = text_cut(sentence) # 基于jieba的中文分词
             self.corpus_words.append(words)
+            self.all_words += words
+            self.vocab.update(words)
 
-    def compute_df(self,):
-        self.tf_list = []
-        for words in self.corpus_words:
+    def compute_tf(self):
+        tf_list = []
+        for words in tqdm(self.corpus_words, desc='compute tf'):
             tf = {}
             for word in words:
                 tf[word] = words.count(word) / len(words)
-            self.tf_list.append(tf)
+            tf_list.append(tf)
+        self.tf_list = tf_list
 
     def compute_idf(self):
-        self.idf_dict = {}
-        for word in self.vocab:
+        idf_dict = {}
+        for word in tqdm(self.vocab, desc='compute idf'):
             num = sum([1 if word in words else 0 for words in self.corpus_words])
-            self.idf_dict[word] = math.log(len(self.corpus_words) / (num+1))
+            idf_dict[word] = math.log(len(self.corpus_words) / (num+1))
+        self.idf_dict = idf_dict
 
-
-
-for i in tqdm(lst, desc='comment'):
-    pass
+    def compute_tfidf(self):
+        self.compute_tf()
+        self.compute_idf()
+        tfidf_list = []
+        for tf in tqdm(self.tf_list, desc='compute tfidf'):
+            tfidf = {}
+            for word, tf_val in tf.items():
+                tfidf[word] = tf_val * self.idf_dict[word]
+            tfidf_list.append(tfidf)
+        self.tfidf_list = tfidf_list
+        return tfidf_list
