@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文本检索系统</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="bg-blue-400 pt-[80px] pb-[60px] flex flex-col items-center space-y-10">
+        <h1 class="text-4xl font-semibold text-white">基于文本TF-IDF算法的关键词检索系统</h1>
+        <form action="" class="flex space-x-3">
+            <input class="border rounded py-2 px-4 w-[450px] outline-none" type="text" name="word" value="{{word}}">
+            <button class="rounded py-2 px-4 bg-orange-400 hover:bg-orange-500 text-white">立即搜索</button>
+        </form>
+    </div>
+    <div class="w-[600px] mx-auto mt-10">
+        <h2 class="text-xl mb-4">搜索结果：</h2>
+        <ul class="border rounded divide-y">
+            {% for item in items %}
+            <li class="p-4">{{item}}</li>
+            {% endfor %}
+            {% if not items %}
+            <li class="p-4">暂无数据</li>
+            {% endif %}
+        </ul>
+    </div>
+</body>
+</html>

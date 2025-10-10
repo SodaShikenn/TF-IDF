@@ -13,6 +13,7 @@ if __name__ == '__main__':
     model.compute_tfidf()
     print(model.tfidf_list)
 
+# 测试进度条
 # if __name__ == '__main__':
 #     LST = [1,2,3]
 #     for i in tqdm(LST, desc='comment'):

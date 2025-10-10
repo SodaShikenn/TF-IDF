@@ -1,7 +1,6 @@
 import math
-from .utils import text_cut
 from tqdm import tqdm # 因为语料比较多，所以计算过程很慢，可以使用tqdm库加载一个进度条，了解处理进度。
-
+from .utils import text_cut
 class TFIDFModel():
     def __init__(self):
         self.all_words = []

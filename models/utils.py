@@ -20,7 +20,14 @@ def text_cut(text, cut_all=False):
             words.append(word)
     return words
 
+def dump_cache(object, path):
+    pickle.dump(object, open(path, 'wb'))
+
+def load_cache(path):
+    return pickle.load(open(path, 'rb'))
 
 if __name__ == '__main__':
-    load_stopwords()
-    print(text_cut("我爱斋藤飞鸟。"))
+    # load_stopwords()
+    # print(text_cut("我爱斋藤飞鸟。"))
+    dump_cache(({'a':1}, [{'b':2}]), './data/test.pkl')
+    # print(load_cache('./data/test.pkl'))
